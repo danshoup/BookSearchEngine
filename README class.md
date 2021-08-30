@@ -1,4 +1,4 @@
-# BookSearchEngine# 21 MERN: Book Search Engine
+# 21 MERN: Book Search Engine
 
 ## Your Task
 
