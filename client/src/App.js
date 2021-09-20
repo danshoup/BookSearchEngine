@@ -5,6 +5,7 @@ import SavedBooks from './pages/SavedBooks';
 import Navbar from './components/Navbar';
 
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 
 // Use Unit 21, Activity 26 for syntax reference here; cut and paste that code to connect our GraphQL endpoint, web token, and auth middleware to our front end...
 
