@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
+import { searchGoogleBooks } from '../utils/API';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 
 // delete the utils/API import and replace it with the useMutation hook and SAVE_BOOK mutation
@@ -23,6 +24,10 @@ const SearchBooks = () => {
   useEffect(() => {
     return () => saveBookIds(savedBookIds);
   });
+
+  // use Unit 21 activity 26, as model for this code
+  const [saveBook, { error }] = useMutation(SAVE_BOOK)
+
 
   // create method to search for books and set state on form submit
   const handleFormSubmit = async (event) => {
@@ -57,6 +62,7 @@ const SearchBooks = () => {
   };
 
 
+
   // create function to handle saving a book to our database
   const handleSaveBook = async (bookId) => {
     // find the book in `searchedBooks` state by the matching id
@@ -65,20 +71,14 @@ const SearchBooks = () => {
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-    // use the useMutation hook to execute the SAVE_BOOK mutation
-    const saveBook = useMutation(SAVE_BOOK);
-
-
     if (!token) {
       return false;
     }
 
     try {
-      const response = await saveBook(bookToSave, token);
-
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
+      const response = await saveBook({
+        variables: {...bookToSave, token: token}
+      });
 
       // if book successfully saves to user's account, save book id to state
       setSavedBookIds([...savedBookIds, bookToSave.bookId]);

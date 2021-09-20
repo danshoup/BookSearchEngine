@@ -6,7 +6,7 @@ import Auth from '../utils/auth';
 
 // add mutation functionality form LOGIN_USER
 import { LOGIN_USER } from '../utils/mutations';
-import { useMutation } from '@apollo/lient';
+import { useMutation } from '@apollo/client';
 
 const LoginForm = () => {
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
