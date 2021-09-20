@@ -16,7 +16,7 @@ const SignupForm = () => {
   const [showAlert, setShowAlert] = useState(false);
   
   // use Unit 21 activity 26, signup.js as a reference to use the ADD_USER mutation
-  const [createUser, { error, data }] = useMutation(ADD_USER);
+  const createUser = useMutation(ADD_USER);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
