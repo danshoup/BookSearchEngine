@@ -8,7 +8,7 @@ import { removeBookId } from '../utils/localStorage';
 // implement useQuery hook to execute GET_ME, REVOVE_BOOK, and mutations...
 import { GET_ME } from '../utils/queries';
 import { REMOVE_BOOK } from '../utils/mutations';
-import { userQuery, useMutation } from '@apollo/client'; 
+import { useQuery, useMutation } from '@apollo/client'; 
 
 
 const SavedBooks = () => {
@@ -19,7 +19,7 @@ const SavedBooks = () => {
   const userData = data?.me || {};
 
   // hood to use REMOVE_BOOK to deleteBook
-  const [deleteBook, { error }] = useMutation(REMOVE_BOOK);
+  const [removeBook, { error }] = useMutation(REMOVE_BOOK);
 
 
 
@@ -32,14 +32,10 @@ const SavedBooks = () => {
     }
 
     try {
-      const response = await deleteBook(bookId, token);
+      await removeBook({
+        variables: { bookID: bookId } 
+      });
 
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
-
-      const updatedUser = await response.json();
-      setUserData(updatedUser);
       // upon success, remove book's id from localStorage
       removeBookId(bookId);
     } catch (err) {
