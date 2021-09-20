@@ -18,15 +18,19 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Create new instance of Apollo server with GraphQL schema
-const server = new ApolloServer({
+async function startServer() {
+server = new ApolloServer({
   typeDefs, 
   resolvers,
   context: authMiddleware,
 });
 
 // Update Express.js to use Apollo server
+await server.start();
 server.applyMiddleware({ app });
+};
 
+startServer();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
