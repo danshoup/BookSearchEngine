@@ -26,7 +26,7 @@ const SearchBooks = () => {
   });
 
   // use Unit 21 activity 26, as model for this code
-  const saveBook = useMutation(SAVE_BOOK)
+  const [saveBook, { error }] = useMutation(SAVE_BOOK)
 
 
   // create method to search for books and set state on form submit
