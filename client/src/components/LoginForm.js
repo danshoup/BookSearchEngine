@@ -2,11 +2,11 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
-import Auth from '../utils/auth';
-
 // add mutation functionality form LOGIN_USER
-import { LOGIN_USER } from '../utils/mutations';
 import { useMutation } from '@apollo/client';
+import { LOGIN_USER } from '../utils/mutations';
+
+import Auth from '../utils/auth';
 
 const LoginForm = () => {
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
@@ -14,7 +14,7 @@ const LoginForm = () => {
   const [showAlert, setShowAlert] = useState(false);
   
   // use Unit 21 activity 26, login.js as a reference to use the LOGIN_USER mutation
-  const loginUser = useMutation(LOGIN_USER);
+  const [loginUser, { error, data }] = useMutation(LOGIN_USER);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -37,7 +37,7 @@ const LoginForm = () => {
         variables: {...userFormData}
       });
 
-      Auth.login(data.loginUser.token);
+      Auth.login(data.login.token);
     } catch (err) {
       console.error(err);
       setShowAlert(true);

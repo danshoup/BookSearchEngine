@@ -4,8 +4,8 @@ import { Form, Button, Alert } from 'react-bootstrap';
 import Auth from '../utils/auth';
 
 // replace the API addUser funcionality
-import { ADD_USER } from '../utils/mutations';
 import { useMutation } from '@apollo/client';
+import { ADD_USER } from '../utils/mutations';
 
 const SignupForm = () => {
   // set initial form state
@@ -16,7 +16,7 @@ const SignupForm = () => {
   const [showAlert, setShowAlert] = useState(false);
   
   // use Unit 21 activity 26, signup.js as a reference to use the ADD_USER mutation
-  const createUser = useMutation(ADD_USER);
+  const [createUser, { error, data }] = useMutation(ADD_USER);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
