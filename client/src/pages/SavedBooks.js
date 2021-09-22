@@ -16,10 +16,10 @@ const SavedBooks = () => {
   // reference Unit 21, Activity 26 SingleThought.js for hook to execute GET_ME query
   const { loading, data } = useQuery(GET_ME);
   // save get me data to variable userData
-  const userData = data?.me;
+  const userData = data?.me || [];
 
   // hood to use REMOVE_BOOK to deleteBook
-  const removeBook = useMutation(REMOVE_BOOK);
+  const [removeBook, { error }] = useMutation(REMOVE_BOOK);
 
 
 
