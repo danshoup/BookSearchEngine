@@ -19,7 +19,7 @@ const SavedBooks = () => {
   const userData = data?.me || [];
 
   // hood to use REMOVE_BOOK to deleteBook
-  const [removeBook, { error }] = useMutation(REMOVE_BOOK);
+  const [deleteBook, { error }] = useMutation(REMOVE_BOOK);
 
 
 
